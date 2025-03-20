@@ -1,15 +1,16 @@
 package com.example.bankingapp;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class banking {
+    private String accountId; // Unique ID for each account
     private double balance;
-    private List<Double> withdrawalHistory = new ArrayList<>(); // Stores last transactions
 
-
-    public banking(double initialBalance) {
+    public banking(String accountId, double initialBalance) {
+        this.accountId = accountId;
         this.balance = initialBalance;
+    }
+
+    public String getAccountId() {
+        return accountId;
     }
 
     public double getBalance() {
@@ -19,19 +20,14 @@ public class banking {
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
-            withdrawalHistory.add(amount); // Store transaction
         }
     }
 
     public boolean withdraw(double amount) {
         if (amount > 0 && balance >= amount) {
             balance -= amount;
-            withdrawalHistory.add(-amount); // Store transaction
             return true;
         }
         return false;
-    }
-    public List<Double> getWithdrawalHistory() {
-        return withdrawalHistory; // Return last withdrawals
     }
 }
